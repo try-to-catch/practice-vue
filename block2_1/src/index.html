@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div id="app">
+    <div class="">
+        <input v-model="search" placeholder="Input smth" type="search">
+        <table>
+            <tr v-for="student in students" :class="{red: student.name.includes(search) && search !== ''}">
+                <td>{{ student.name }}</td>
+                <td>{{ student.group }}</td>
+                <td><input :checked="student.isDonePr" disabled type="checkbox"></td>
+                <td class="link" role="button" @click="removeCompositionItem(student._id)">REMOVE</td>
+            </tr>
+        </table>
+
+        <div>
+            <div>
+                <label>
+                    Username
+                    <input v-model.trim="newStudent.name" type="text">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Group
+                    <select v-model="newStudent.group">
+                        <option value="RPZ-20-1/9">RPZ-20-1/9</option>
+                        <option value="RPZ-20-2/9">RPZ-20-2/9</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    complete task?
+                    <input type="checkbox" v-model="newStudent.isDonePr">
+                </label>
+            </div>
+            <button class="btn" role="button" @click="addStudent">ADD</button>
+        </div>
+    </div>
+
+</div>
+<!--<script src="./../dist/main.js"></script>-->
+<script src="main.js"></script>
+
+
+</body>
+</html>
+
+<style>
+    .btn {
+        padding: 4px 20px;
+    }
+
+    .link {
+        text-decoration: underline;
+        color: cadetblue;
+        cursor: pointer;
+    }
+
+    .red {
+        color: red;
+    }
+
+    table {
+        margin: 10px 0;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 4px 10px;
+    }
+</style>
