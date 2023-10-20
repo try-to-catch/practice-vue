@@ -21,7 +21,7 @@ export function useStudent() {
     }
 
     function updateStudent(student) {
-        axios.put(`http://34.82.81.113:3000/students/${student._id}`, student)
+        axios.put(`${URL}/students/${student._id}`, student)
             .then(data => {
                 console.log(data);
                 getStudents()
