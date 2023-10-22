@@ -20,6 +20,7 @@ const emit = defineEmits({
 const shouldShowSuggestionList = ref(false)
 const hasSuggestionBeenRecentlyAccepted = ref(false)
 const inputRef = ref(null)
+
 function onAcceptSuggestion(value) {
   emit('update:modelValue', value)
 
@@ -42,12 +43,12 @@ function onFocusIn() {
 <template>
   <div class="relative">
     <input
+        ref="inputRef"
         :disabled="disabled"
         :placeholder="placeholder"
         :value="modelValue"
         class="py-3 px-4 rounded font-thin focus:outline-none duration-100 h-auto w-full border border-slate-300"
         type="search"
-        ref="inputRef"
         @focusin="onFocusIn" @focusout="shouldShowSuggestionList = false"
         @input="$emit('update:modelValue', $event.target.value)">
     <transition

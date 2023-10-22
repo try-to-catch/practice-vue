@@ -1,5 +1,5 @@
 <script setup>
-import {getCitiesByString, getAddressByWarehouseNumber} from "./api.js"
+import {getAddressByWarehouseNumber, getCitiesByString} from "./api.js"
 import {computed, ref, watch} from "vue";
 import InputWithSuggestions from "./components/InputWithSuggestions.vue";
 
@@ -41,7 +41,8 @@ watch(warehouseInput, async value => {
         <label>
           Поштове відділення
           <InputWithSuggestions v-model="warehouseInput" :columns="['Description']"
-                                :suggestions="warehouseSuggestions" class="mt-1.5" placeholder="Пошук за номером" :disabled="!isWarehouseInputEnabled"/>
+                                :disabled="!isWarehouseInputEnabled" :suggestions="warehouseSuggestions" class="mt-1.5"
+                                placeholder="Пошук за номером"/>
         </label>
       </div>
     </div>
