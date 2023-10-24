@@ -1,6 +1,6 @@
 <script setup>
 import {reactive, ref} from "vue";
-import {useStudent} from "../composables/student.js";
+import {useStudent} from "/src/composables/student.js";
 
 const search = ref('')
 
@@ -52,7 +52,9 @@ function update() {
     <table>
       <tr v-for="student in students" :class="{red: student.name.includes(search) && search !== ''}">
         <td><img :src="student.photo" alt="photo" style="height: 100px"></td>
-        <td>{{ student.name }}</td>
+        <td>
+          <router-link :to="{name: 'students.show', params: {studentId: student._id}}"> {{ student.name }}</router-link>
+        </td>
         <td>{{ student.group }}</td>
         <td><input :checked="student.isDonePr" disabled type="checkbox"></td>
         <td class="link" role="button" @click="deleteStudent(student._id)">REMOVE</td>
