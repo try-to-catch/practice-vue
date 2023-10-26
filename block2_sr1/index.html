@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+theme switcher by radio button
+<form >
+    <label>
+        <input type="radio" name="theme" value="light"> Light
+    </label>
+    <label>
+        <input type="radio" name="theme" value="dark"> Dark
+    </label>
+</form>
+
+<script>
+    const radios = document.querySelectorAll('input[type=radio][name="theme"]');
+    const body = document.body;
+    const theme = localStorage.getItem('theme');
+
+    if (theme) {
+        body.classList.add(theme);
+
+        if (theme === 'dark') {
+            radios[1].checked = true;
+        } else {
+            radios[0].checked = true;
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.value === 'dark') {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    radios.forEach(radio => radio.addEventListener('change', switchTheme));
+</script>
+
+</body>
+</html>
+
+<style>
+    .dark {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .light {
+        background-color: #fff;
+        color: #333;
+    }
+</style>
