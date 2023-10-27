@@ -6,7 +6,7 @@ import {useTheme} from "/src/composables/theme.js";
 const {studentId} = defineProps({studentId: String})
 
 const {getStudentById, studentsCount} = useStudent()
-const {toggleTheme, themeStyles} = useTheme()
+const theme = useTheme()
 
 const student = ref(null)
 onMounted(() => {
@@ -16,8 +16,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :style="themeStyles">
-    <button @click="toggleTheme">Toggle theme</button>
+  <div :style="theme.themeStyles">
+    <button @click="theme.toggleTheme">Toggle theme</button>
     <router-link :to="{name: 'students.index'}">На головну</router-link>{{studentsCount}}
     <table>
       <tr v-if="student">

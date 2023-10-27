@@ -1,8 +1,9 @@
 import {computed, onMounted, ref, watch} from "vue";
+import {defineStore} from "pinia";
 
-const theme = ref('light')
 
-export function useTheme() {
+export const useTheme = defineStore('theme', () => {
+    const theme = ref('light')
 
     onMounted(() => {
         const localTheme = localStorage.getItem('theme')
@@ -30,4 +31,4 @@ export function useTheme() {
     })
 
     return {themeStyles, toggleTheme}
-}
+})

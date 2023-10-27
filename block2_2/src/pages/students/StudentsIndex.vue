@@ -6,7 +6,7 @@ import {useTheme} from "../../composables/theme.js";
 const search = ref('')
 
 const {students, addStudent: addStudent, updateStudent, deleteStudent, studentsCount} = useStudent()
-const {toggleTheme, themeStyles} = useTheme()
+const theme = useTheme()
 
 const newStudent = reactive({
   name: '',
@@ -50,8 +50,8 @@ function update() {
 </script>
 
 <template>
-  <div :style="themeStyles">
-    <button @click="toggleTheme">Toggle theme</button>
+  <div :style="theme.themeStyles">
+    <button @click="theme.toggleTheme">Toggle theme</button>
     <input v-model="search" placeholder="Input smth" type="search">{{studentsCount}}
     <table>
       <tr v-for="student in students" :class="{red: student.name.includes(search) && search !== ''}">
