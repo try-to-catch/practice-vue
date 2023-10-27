@@ -1,10 +1,10 @@
 import axios from "axios";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const URL = "http://34.82.81.113:3000"
 
-
 const students = ref([])
+const studentsCount = computed(() => students.value.length)
 
 export function useStudent() {
     function getStudents() {
@@ -47,5 +47,7 @@ export function useStudent() {
 
     }
 
-    return {students, addStudent, updateStudent, deleteStudent, getStudentById}
+
+
+    return {students, addStudent, updateStudent, deleteStudent, getStudentById, studentsCount}
 }

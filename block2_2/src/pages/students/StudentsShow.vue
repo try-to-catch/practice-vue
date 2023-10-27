@@ -1,20 +1,24 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useStudent} from "/src/composables/student.js";
+import {useTheme} from "/src/composables/theme.js";
 
 const {studentId} = defineProps({studentId: String})
 
-const {getStudentById} = useStudent()
+const {getStudentById, studentsCount} = useStudent()
+const {toggleTheme, themeStyles} = useTheme()
 
 const student = ref(null)
 onMounted(() => {
    getStudentById(studentId).then((value) => student.value = value )
 })
+
 </script>
 
 <template>
-  <div>
-    <router-link :to="{name: 'students.index'}">На головну</router-link>
+  <div :style="themeStyles">
+    <button @click="toggleTheme">Toggle theme</button>
+    <router-link :to="{name: 'students.index'}">На головну</router-link>{{studentsCount}}
     <table>
       <tr v-if="student">
         <td><img :src="student.photo" alt="photo" style="height: 100px"></td>

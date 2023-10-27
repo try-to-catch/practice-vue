@@ -1,10 +1,12 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {useStudent} from "/src/composables/student.js";
+import {useTheme} from "../../composables/theme.js";
 
 const search = ref('')
 
-const {students, addStudent: addStudent, updateStudent, deleteStudent} = useStudent()
+const {students, addStudent: addStudent, updateStudent, deleteStudent, studentsCount} = useStudent()
+const {toggleTheme, themeStyles} = useTheme()
 
 const newStudent = reactive({
   name: '',
@@ -44,11 +46,13 @@ function update() {
   newStudent.group = ''
   newStudent.isDonePr = false
 }
+
 </script>
 
 <template>
-  <div class="">
-    <input v-model="search" placeholder="Input smth" type="search">
+  <div :style="themeStyles">
+    <button @click="toggleTheme">Toggle theme</button>
+    <input v-model="search" placeholder="Input smth" type="search">{{studentsCount}}
     <table>
       <tr v-for="student in students" :class="{red: student.name.includes(search) && search !== ''}">
         <td><img :src="student.photo" alt="photo" style="height: 100px"></td>
