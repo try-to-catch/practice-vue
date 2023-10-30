@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
+import {useAuth} from "/src/composables/auth.js";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,9 +18,29 @@ const router = createRouter({
             path: "/students/:studentId",
             name: "students.show",
             component: () => import("/src/pages/students/StudentsShow.vue"),
-            props: true
+            props: true,
+            meta: {requiresAuth: true}
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("/src/pages/Login.vue"),
         },
     ],
-});
+})
+
+
+const {user} = useAuth()
+router.beforeEach((to, from) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (user.value === null) {
+            return ({
+                path: '/login',
+                query: {redirect: to.fullPath}
+            })
+        }
+    }
+})
+
 
 export default router;

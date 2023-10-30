@@ -2,6 +2,7 @@
 import {reactive, ref} from "vue";
 import {useStudent} from "/src/composables/student.js";
 import {useTheme} from "../../composables/theme.js";
+import {useAuth} from "../../composables/auth.js";
 
 const search = ref('')
 
@@ -47,6 +48,7 @@ function update() {
   newStudent.isDonePr = false
 }
 
+const {user} = useAuth()
 </script>
 
 <template>
@@ -61,8 +63,8 @@ function update() {
         </td>
         <td>{{ student.group }}</td>
         <td><input :checked="student.isDonePr" disabled type="checkbox"></td>
-        <td class="link" role="button" @click="deleteStudent(student._id)">REMOVE</td>
         <td class="link" role="button" @click="edit(student)">Edit</td>
+        <td class="link" role="button" @click="deleteStudent(student._id)" v-show="student.group === user?.group">REMOVE</td>
       </tr>
     </table>
 
