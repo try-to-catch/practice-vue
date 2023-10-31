@@ -29,7 +29,7 @@ export default function App() {
                 attribution: '&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(mapRef.current);
         }
-    }, []); // Инициализация карты происходит только один раз
+    }, []);
 
     const filteredData = useMemo(() => {
         if (!smellType) return serverInfo;
@@ -53,7 +53,8 @@ export default function App() {
 
     return (
         <>
-            <select value={smellType} onChange={(event) => setSmellType(event.target.value)} id="type" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm block w-full p-2.5">
+            <select value={smellType} onChange={(event) => setSmellType(event.target.value)} id="type"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm block w-full p-2.5">
                 <option value='' disabled>За типом сморіду</option>
                 <option value="Йод">Йод</option>
                 <option value="Аміак">Аміак</option>
